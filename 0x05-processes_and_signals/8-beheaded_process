@@ -2,5 +2,5 @@
 #terminate 7-highlander
 pid=$(pgrep -f 7-highlander)
 if [ -n "$pid" ]; then
-  kill "$pid"
+  kill -9 "$pid"
 fi
