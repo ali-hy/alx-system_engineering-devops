@@ -1,12 +1,25 @@
 #!/usr/bin/env bash
 #update config to redirect on /redirect_me
 
+sudo apt-get purge -y nginx nginx-common nginx-full
 apt-get update
 apt-get install -y nginx
 service nginx start
 
-sudo bash -c 'echo "Hello World!" > /var/www/html/index.html'
+echo "events {
+    worker_connections 1024;
+}
+http {
+    server {
+        listen 80;
+        location /redirect_me {
+             return 301 https://youtu.be/PKffm2uI4dk?si=nj8e4kwkz4XGYpaZ;
+        }
+        location = / {
+            add_header Content-Type text/plain;
+            return 200 'Hello World!\\n';
+        }
+    }
+}" >/etc/nginx/nginx.conf
 
-sudo sed -i 's/}$/\nlocation \/redirect_me {\n    return 301 https:\/\/www.youtube.com\/watch?v=PKffm2uI4dk;\n}\n}/' /etc/nginx/sites-available/default
-
-nginx -s reload
+service nginx reload
