@@ -3,6 +3,6 @@
 
 sed -i "/^        listen 80;/a \        error_page 404 /404.html;\n        location /404.html {\n                add_header Content-Type text/plain;\n                return 404 \"Ceci n'est pas une page\\n\";\n        }" /etc/nginx/nginx.conf
 
-sudo sed -i 's|location /|location = /|' /etc/nginx/nginx.conf
+sudo sed -i 's|location / |location = /|' /etc/nginx/nginx.conf
 
 service nginx reload
