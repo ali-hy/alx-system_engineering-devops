@@ -17,4 +17,4 @@ http {
     }
 }" > /etc/nginx/nginx.conf
 
-service nginx reload
+nginx -s reload
