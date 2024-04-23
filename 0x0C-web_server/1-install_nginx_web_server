@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#install nginx on a web server
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: setup_nginx.sh PATH_TO_FILE"
+  exit 1
+fi
+
+sudo apt-get update
+
+sudo apt-get install -y nginx
+
+sudo service nginx start
+
+echo "server {
+    listen 80;
+    location / {
+        return 200 'Hello World!';
+        add_header Content-Type text/plain;
+    }
+}" | sudo tee /etc/nginx/sites-available/default
+
+sudo service nginx reload
