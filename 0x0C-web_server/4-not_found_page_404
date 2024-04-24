@@ -5,7 +5,6 @@ apt-get update
 apt-get install -y nginx
 service nginx start
 
-
 printf "Ceci n'est pas une page\n" > /var/www/html/404
 ERROR_PAGE='error_page 404 /404.html;'
 FILE='/etc/nginx/sites-available/default'
