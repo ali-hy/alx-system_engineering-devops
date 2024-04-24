@@ -5,6 +5,8 @@ apt-get update
 apt-get install -y nginx
 service nginx start
 
+printf "Hello World!\n" > /var/www/html/index.html;
+
 REDIRECT='location = /redirect_me {return 301 "https://www.youtube.com/watch?v=PKffm2uI4dk";}'
 FILE='/etc/nginx/sites-available/default'
 
