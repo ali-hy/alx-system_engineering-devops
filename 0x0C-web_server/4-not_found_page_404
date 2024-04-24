@@ -1,28 +1,10 @@
 #!/usr/bin/env bash
 #update config to have an not-found page
 
-sudo apt-get purge -y nginx nginx-common nginx-full
 apt-get update
 apt-get install -y nginx
 service nginx start
 
-echo "events {
-    worker_connections 1024;
-}
-http {
-    server {
-        listen 80;
-        error_page 404 /404.html;
-        location = /404.html {
-            return 404 \"Ceci n'est pas une page\\n\";
-        }
-        location /redirect_me {
-             return 301 https://youtu.be/PKffm2uI4dk?si=nj8e4kwkz4XGYpaZ;
-        }
-        location = / {
-            return 200 'Hello World!\\n';
-        }
-    }
-}" >/etc/nginx/nginx.conf
+printf "Ceci n'est pas une page\n" > /var/www/html/404
 
 nginx -s reload
