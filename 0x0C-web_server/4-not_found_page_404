@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
-#update config to have an not-found page
+#update config to redirect on /redirect_me
 
 apt-get update
 apt-get install -y nginx
 service nginx start
 
+
 printf "Ceci n'est pas une page\n" > /var/www/html/404
+ERROR_PAGE='error_page 404 /404.html;'
+FILE='/etc/nginx/sites-available/default'
+
+if ! awk '/error_page 404 \/404.html/{found=1} END{if(!found) exit 1}' "$FILE"; then
+    sed -i '/server_name _;/a \    '"$ERROR_PAGE" "$FILE"
+fi
 
 nginx -s reload
