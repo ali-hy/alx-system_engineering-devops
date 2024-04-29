@@ -10,6 +10,7 @@ ERROR_PAGE='error_page 404 /404.html;'
 FILE='/etc/nginx/sites-available/default'
 
 printf "Hello World!\n" > /var/www/html/index.html;
+printf "Ceci n'est pas une page" > /var/www/html/404.html;
 
 REDIRECT='location = /redirect_me {return 301 "https://www.youtube.com/watch?v=PKffm2uI4dk";}'
 
